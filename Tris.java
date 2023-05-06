@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class TicTacToe extends Window {
+public class Tris extends Window {
 
     private boolean state = true; // state of the game
     private String playerChar;
@@ -16,7 +16,7 @@ public class TicTacToe extends Window {
     }
 
     /** Create a working TicTacToe game*/
-    public TicTacToe(String title) throws HeadlessException {
+    public Tris(String title) throws HeadlessException {
         super(title);
 
         mainText.setText(turn.getAbbreviation() + " - Turno");
