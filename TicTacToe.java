@@ -8,13 +8,12 @@ public class TicTacToe extends Window {
 
     private boolean state = true; // state of the game
     private String playerChar;
-    private Player turn = Player.PLAYERX;
+    private Player turn = Player.GiocatoreX;
 
 
     public String getPlayerChar() {
         return playerChar;
     }
-
 
     /** Create a working TicTacToe game*/
     public TicTacToe(String title) throws HeadlessException {
@@ -95,8 +94,8 @@ public class TicTacToe extends Window {
 
         // while the game is running
         if (state) {
-                // if playerX played  an empty button then make the move
-            if (turn == Player.PLAYERX && button.getText().equals("")) {
+                // if GiocatoreX played  an empty button then make the move
+            if (turn == Player.GiocatoreX && button.getText().equals("")) {
                 button.setForeground(new Color(17, 19, 92, 255));
                 button.setFont(new Font("duran", Font.PLAIN, 36));
                 button.setText("X");
@@ -121,7 +120,7 @@ public class TicTacToe extends Window {
                         state = false;
                         popupReset();
                     }else {
-                            turn = Player.PLAYERO;
+                            turn = Player.GiocatoreO;
                         if (state)
                             mainText.setText(turn.getAbbreviation() + " - Turno");
 
@@ -130,7 +129,7 @@ public class TicTacToe extends Window {
 
             }
             // same for the O Player
-            else if (turn == Player.PLAYERO && button.getText().equals("")) {
+            else if (turn == Player.GiocatoreO && button.getText().equals("")) {
                 button.setForeground(new Color(17, 19, 92, 255));
                 button.setText("O");
 
@@ -153,7 +152,7 @@ public class TicTacToe extends Window {
                         popupReset();
                         state = false;
                     }
-                            turn = Player.PLAYERX;
+                            turn = Player.GiocatoreX;
                         if (state)
                             mainText.setText(turn.getAbbreviation() + " - Turno");
                 }
@@ -178,7 +177,7 @@ public class TicTacToe extends Window {
             buttons[i].setText("");
             buttons[i].setBackground(null);
         }
-        turn = Player.PLAYERX;
+        turn = Player.GiocatoreX;
 
         state = true;
         mainText.setText(turn.getAbbreviation() + " - Turno");
