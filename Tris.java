@@ -105,7 +105,7 @@ public class Tris extends Window {
                 // checking if X won
                 if (win()[0] == 1) {
                     int[] pos = new int[]{win()[1], win()[2], win()[3]};
-                    mainText.setText("X - Vince");
+                    mainText.setText("X - Ha Vinto");
                     state = false;
                     // setting win combination to green
                     for (int po : pos)
@@ -137,7 +137,7 @@ public class Tris extends Window {
                 if (win()[0] == 1) {
                     int[] pos = new int[]{win()[1], win()[2], win()[3]};
 
-                    mainText.setText("O - Vince");
+                    mainText.setText("O - Ha Vinto");
                     state = false;
 
 

@@ -27,13 +27,6 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 
-        // Setting Nimbus LookAndFeel
-        try {
-            UIManager.setLookAndFeel(new NimbusLookAndFeel());
-        } catch (UnsupportedLookAndFeelException unsupportedLookAndFeelException) {
-            unsupportedLookAndFeelException.printStackTrace();
-           }
-
 
         // creating buttons
         for (int i = 0; i < 9; i++) {
