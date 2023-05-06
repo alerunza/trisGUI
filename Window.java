@@ -14,14 +14,9 @@ public class Window extends JFrame {
     JPanel mainPanel = new JPanel();
     JLabel mainText;
 
-    protected Font duran;
-
     public Window(String title) throws HeadlessException {
-
-
         // Setting up the window
         super(title);
-
 
         // Window setup
         setSize(450,400);
@@ -58,22 +53,6 @@ public class Window extends JFrame {
         add(mainText, BorderLayout.NORTH);
 
         setVisible(true);
-    }
-
-
-
-    /** Creating duran font*/
-    protected void duranFont(){
-        // creating new font
-        try {
-            duran = Font.createFont(Font.TRUETYPE_FONT, new File("FontsFree-Net-Duran-Light.ttf"));
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("FontsFree-Net-Duran-Light.ttf")));
-
-        }catch (IOException | FontFormatException e){
-            e.printStackTrace();
-
-        }
     }
 
     /** Action to do when a button is pressed */

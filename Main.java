@@ -1,7 +1,6 @@
 public class Main {
 
     public static void main(String[] args) {
-
-        new TicTacToe("TicTacToe");
+        new TicTacToe("Tris - 4°B");
     }
 }

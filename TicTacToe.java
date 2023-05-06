@@ -20,7 +20,7 @@ public class TicTacToe extends Window {
     public TicTacToe(String title) throws HeadlessException {
         super(title);
 
-        mainText.setText(turn.getAbbreviation() + " Turns");
+        mainText.setText(turn.getAbbreviation() + " - Turno");
 
         // this is needed for the keyEvent
         this.setFocusable(true);
@@ -106,7 +106,7 @@ public class TicTacToe extends Window {
                 // checking if X won
                 if (win()[0] == 1) {
                     int[] pos = new int[]{win()[1], win()[2], win()[3]};
-                    mainText.setText("X won");
+                    mainText.setText("X - Vince");
                     state = false;
                     // setting win combination to green
                     for (int po : pos)
@@ -117,13 +117,13 @@ public class TicTacToe extends Window {
                 // otherwise we go onto the next player after checking the tie
                 else {
                     if (tie()) {
-                        mainText.setText("TIE");
+                        mainText.setText("Pareggio");
                         state = false;
                         popupReset();
                     }else {
                             turn = Player.PLAYERO;
                         if (state)
-                            mainText.setText(turn.getAbbreviation() + " Turns");
+                            mainText.setText(turn.getAbbreviation() + " - Turno");
 
                     }
                 }
@@ -138,7 +138,7 @@ public class TicTacToe extends Window {
                 if (win()[0] == 1) {
                     int[] pos = new int[]{win()[1], win()[2], win()[3]};
 
-                    mainText.setText("O won");
+                    mainText.setText("O - Vince");
                     state = false;
 
 
@@ -149,46 +149,26 @@ public class TicTacToe extends Window {
                     popupReset();
                 } else {
                     if (tie()) {
-                        mainText.setText("TIE");
+                        mainText.setText("Pareggio");
                         popupReset();
                         state = false;
                     }
                             turn = Player.PLAYERX;
                         if (state)
-                            mainText.setText(turn.getAbbreviation() + " Turns");
+                            mainText.setText(turn.getAbbreviation() + " - Turno");
                 }
             }
         }
     }
 
-
-
     /** Popup that ask for restarting the game*/
     public void popupReset() {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(this,
-                "Restart?", "END OF GAME", dialogButton);
+                "Vuoi riavviare la partita?", "Fine della Partita", dialogButton);
         if (dialogResult == JOptionPane.YES_OPTION)
             reset();
     }
-    /** Popup that ask if the player wants to play "X" or "O" */
-    public void playerChoice() {
-        String[] options = new String[2];
-        options[0] = "X";
-        options[1] = "O";
-        int answer = JOptionPane.showOptionDialog(this,
-                "Do you want to be X or O ",
-                "Player", JOptionPane.YES_NO_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null,
-                options, null);
-
-
-        if (answer == JOptionPane.YES_OPTION)
-            playerChar = "X";
-        else
-            playerChar = "O";
-    }
-
 
     /** Restart the game*/
     private void reset() {
@@ -201,7 +181,7 @@ public class TicTacToe extends Window {
         turn = Player.PLAYERX;
 
         state = true;
-        mainText.setText(turn.getAbbreviation() + " Turns");
+        mainText.setText(turn.getAbbreviation() + " - Turno");
     }
 
 
@@ -226,16 +206,6 @@ public class TicTacToe extends Window {
         }
         return emptyCase == 9;
     }
-
-
-
-
-
-
-
-
-
-
 }
 
 
