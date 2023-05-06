@@ -13,8 +13,6 @@ public class Window extends JFrame {
     JButton[] buttons = new JButton[9];
     JPanel mainPanel = new JPanel();
     JLabel mainText;
-    JLabel component = new JLabel("<html> Press R to restart <br> <br>" +
-            "Press A to enable/disable the AI </html>");
 
     protected Font duran;
 
@@ -60,12 +58,6 @@ public class Window extends JFrame {
         add(mainText, BorderLayout.NORTH);
 
         setVisible(true);
-
-
-        component.setFont(new Font("Arial", Font.BOLD, 15));
-        component.setForeground(new Color(17, 19, 92, 255));
-        JOptionPane.showMessageDialog(this,component,"Shortcuts",
-                JOptionPane.INFORMATION_MESSAGE);
     }
 
 
