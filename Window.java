@@ -26,8 +26,6 @@ public class Window extends JFrame {
         mainPanel.setLayout(new GridLayout(3,3));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-
-
         // creating buttons
         for (int i = 0; i < 9; i++) {
                 buttons[i] = new JButton("");
