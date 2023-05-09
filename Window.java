@@ -14,7 +14,7 @@ public class Window extends JFrame {
     JPanel mainPanel = new JPanel();
     JLabel mainText;
 
-    public Window(String title) throws HeadlessException {
+    public Window(String title) {
         // Setting up the window
         super(title);
 
@@ -26,16 +26,14 @@ public class Window extends JFrame {
         mainPanel.setLayout(new GridLayout(3,3));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-
-
-        // creating buttons
         for (int i = 0; i < 9; i++) {
-                buttons[i] = new JButton("");
+            buttons[i] = new JButton("");
             buttons[i].setFont(new Font("duran", Font.PLAIN, 36));
-                buttons[i].setFocusable(false); // making sure they can't be focused (like with tab)
-                buttons[i].addActionListener(this::actionPerformed); // adding an action listener for when we press it
-                mainPanel.add(buttons[i]); // adding buttons to our mainPanel 3 by 3 grid
+            buttons[i].setFocusable(false); // making sure they can't be focused (like with tab)
+            buttons[i].addActionListener(this::actionPerformed); // adding an action listener for when we press it
+            mainPanel.add(buttons[i]); // adding buttons to our mainPanel 3 by 3 grid
         }
+
         add(mainPanel,BorderLayout.CENTER); // adding the mainPanel to the center of our window
 
 

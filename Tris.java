@@ -162,11 +162,19 @@ public class Tris extends Window {
 
     /** Popup that ask for restarting the game*/
     public void popupReset() {
+        String[] scelta = new String[] {"Si", "No"};
         int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog(this,
-                "Vuoi riavviare la partita?", "Fine della Partita", dialogButton);
-        if (dialogResult == JOptionPane.YES_OPTION)
+        int dialogResult = JOptionPane.showOptionDialog(this,
+                "Vuoi riavviare la partita?",
+                "Fine della Partita",
+                dialogButton,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                scelta,
+                scelta[0]);
+        if (dialogResult == JOptionPane.YES_OPTION) {
             reset();
+        }
     }
 
     /** Restart the game*/
