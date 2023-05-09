@@ -18,6 +18,7 @@ public class Window extends JFrame {
         // Setting up the window
         super(title);
 
+
         // Window setup
         setSize(450,400);
         setLocationRelativeTo(null);
