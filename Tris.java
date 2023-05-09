@@ -96,20 +96,22 @@ public class Tris extends Window {
         if (state) {
                 // if GiocatoreX played  an empty button then make the move
             if (turn == Player.GiocatoreX && button.getText().equals("")) {
-                button.setForeground(new Color(17, 19, 92, 255));
+                button.setForeground(Color.BLUE);
                 button.setFont(new Font("duran", Font.PLAIN, 36));
                 button.setText("X");
-
-
 
                 // checking if X won
                 if (win()[0] == 1) {
                     int[] pos = new int[]{win()[1], win()[2], win()[3]};
                     mainText.setText("X - Ha Vinto");
                     state = false;
+
                     // setting win combination to green
-                    for (int po : pos)
-                        buttons[po].setBackground(new Color(18, 222, 0, 171));
+                    for (int po : pos){
+                        buttons[po].setOpaque(true);
+                        buttons[po].setBorderPainted(false);
+                        buttons[po].setBackground(Color.GREEN);
+                    }
 
                     popupReset();
                 }
@@ -121,8 +123,10 @@ public class Tris extends Window {
                         popupReset();
                     }else {
                             turn = Player.GiocatoreO;
-                        if (state)
+                        if (state){
+                            mainText.setForeground(Color.RED);
                             mainText.setText(turn.getAbbreviation() + " - Turno");
+                        }
 
                     }
                 }
@@ -130,7 +134,7 @@ public class Tris extends Window {
             }
             // same for the O Player
             else if (turn == Player.GiocatoreO && button.getText().equals("")) {
-                button.setForeground(new Color(17, 19, 92, 255));
+                button.setForeground(Color.RED);
                 button.setText("O");
 
 
@@ -140,10 +144,11 @@ public class Tris extends Window {
                     mainText.setText("O - Ha Vinto");
                     state = false;
 
-
-
-                    for (int po : pos)
-                        buttons[po].setBackground(new Color(18, 222, 0, 171));
+                    for (int po : pos){
+                        buttons[po].setOpaque(true);
+                        buttons[po].setBorderPainted(false);
+                        buttons[po].setBackground(Color.GREEN);
+                    }
 
                     popupReset();
                 } else {
@@ -152,9 +157,11 @@ public class Tris extends Window {
                         popupReset();
                         state = false;
                     }
-                            turn = Player.GiocatoreX;
-                        if (state)
-                            mainText.setText(turn.getAbbreviation() + " - Turno");
+                    turn = Player.GiocatoreX;
+                    if (state){
+                        mainText.setForeground(Color.BLUE);
+                        mainText.setText(turn.getAbbreviation() + " - Turno");
+                    }
                 }
             }
         }
@@ -188,6 +195,7 @@ public class Tris extends Window {
         turn = Player.GiocatoreX;
 
         state = true;
+        mainText.setForeground(Color.BLUE);
         mainText.setText(turn.getAbbreviation() + " - Turno");
     }
 

@@ -18,7 +18,6 @@ public class Window extends JFrame {
         // Setting up the window
         super(title);
 
-
         // Window setup
         setSize(450,400);
         setLocationRelativeTo(null);
@@ -35,13 +34,12 @@ public class Window extends JFrame {
             mainPanel.add(buttons[i]); // adding buttons to our mainPanel 3 by 3 grid
         }
 
-        add(mainPanel,BorderLayout.CENTER); // adding the mainPanel to the center of our window
-
+        add(mainPanel, BorderLayout.CENTER); // adding the mainPanel to the center of our window
 
         mainText = new JLabel("", SwingConstants.CENTER); // empty label for information
         mainText.setFont(new Font("Arial", Font.BOLD, 16));
         mainText.setPreferredSize(new Dimension(0,25));
-        mainText.setForeground(new Color(0, 158, 143));
+        mainText.setForeground(Color.BLUE);
         add(mainText, BorderLayout.NORTH);
 
         setVisible(true);
