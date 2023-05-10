@@ -127,7 +127,6 @@ public class Tris extends Window {
                             mainText.setForeground(Color.RED);
                             mainText.setText(turn.getAbbreviation() + " - Turno");
                         }
-
                     }
                 }
 

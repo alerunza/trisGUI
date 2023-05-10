@@ -1,11 +1,8 @@
 import javax.swing.*;
-
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
-
 
 /**  Constructor to make a TicTacToe window with Nimbus style*/
 public class Window extends JFrame {
@@ -26,8 +23,15 @@ public class Window extends JFrame {
         mainPanel.setLayout(new GridLayout(3,3));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        try {
+            UIManager.setLookAndFeel(new NimbusLookAndFeel());
+        } catch (UnsupportedLookAndFeelException unsupportedLookAndFeelException) {
+            unsupportedLookAndFeelException.printStackTrace();
+        }
+
         for (int i = 0; i < 9; i++) {
             buttons[i] = new JButton("");
+            buttons[i].setBackground(null);
             buttons[i].setFont(new Font("duran", Font.PLAIN, 36));
             buttons[i].setFocusable(false); // making sure they can't be focused (like with tab)
             buttons[i].addActionListener(this::actionPerformed); // adding an action listener for when we press it
