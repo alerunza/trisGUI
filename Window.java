@@ -44,7 +44,7 @@ public class Window extends JFrame {
         mainText.setFont(new Font("Arial", Font.BOLD, 16));
         mainText.setPreferredSize(new Dimension(0,25));
         mainText.setForeground(Color.BLUE);
-        add(mainText, BorderLayout.NORTH);
+        add(mainText, BorderLayout.SOUTH);
 
         setVisible(true);
     }
