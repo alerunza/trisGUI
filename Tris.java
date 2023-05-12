@@ -3,22 +3,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Objects;
 
 public class Tris extends Window {
 
     private boolean statusPartita = true;
     private boolean resa = false;
+    private int resaConta = 0;
     public String statusVittoria = "";
 
     public Tris(String title) {
         super(title);
 
-        if(turno == Giocatore.gX){
+        if(turno.equals(Giocatore.gX)){
             testo.setForeground(Color.BLUE);
-        } else if(turno == Giocatore.gO){
+        } else if(turno.equals(Giocatore.gO)){
             testo.setForeground(Color.RED);
         }
-        testo.setText(turno.getAbbreviation() + " - Turno");
+        testo.setText(turno + " - Turno");
 
         // è necessario per il KeyEvent
         this.setFocusable(true);
@@ -67,7 +69,7 @@ public class Tris extends Window {
         // while the game is running
         if (statusPartita) {
                 // if GiocatoreX played  an empty button then make the move
-            if (turno == Giocatore.gX && button.getText().equals("")) {
+            if (turno.equals(Giocatore.gX) && button.getText().equals("")) {
                 button.setForeground(Color.BLUE);
                 button.setFont(new Font("Arial", Font.PLAIN, 36));
                 button.setText("X");
@@ -102,14 +104,14 @@ public class Tris extends Window {
                             turno = Giocatore.gO;
                         if (statusPartita){
                             testo.setForeground(Color.RED);
-                            testo.setText(turno.getAbbreviation() + " - Turno");
+                            testo.setText(turno + " - Turno");
                         }
                     }
                 }
 
             }
             // same for the O Player
-            else if (turno == Giocatore.gO && button.getText().equals("")) {
+            else if (turno.equals(Giocatore.gO) && button.getText().equals("")) {
                 button.setForeground(Color.RED);
                 button.setText("O");
 
@@ -139,7 +141,7 @@ public class Tris extends Window {
                     turno = Giocatore.gX;
                     if (statusPartita){
                         testo.setForeground(Color.BLUE);
-                        testo.setText(turno.getAbbreviation() + " - Turno");
+                        testo.setText(turno + " - Turno");
                     }
                 }
             }
@@ -176,14 +178,16 @@ public class Tris extends Window {
 
         sceltaGiocatore();
 
-        if(turno == Giocatore.gX){
+        if(turno.equals(Giocatore.gX)){
             testo.setForeground(Color.BLUE);
-        } else if(turno == Giocatore.gO){
+        } else if(turno.equals(Giocatore.gO) ){
             testo.setForeground(Color.RED);
         }
 
         statusPartita = true;
-        testo.setText(turno.getAbbreviation() + " - Turno");
+        resa = false;
+        resaConta = 0;
+        testo.setText(turno + " - Turno");
     }
 
 
@@ -197,6 +201,7 @@ public class Tris extends Window {
         }
         if (tasto == KeyEvent.VK_A) {
             resa = true;
+            resaConta++;
             resaDeiConti();
         }
     }
@@ -215,12 +220,20 @@ public class Tris extends Window {
     }
 
     public void resaDeiConti(){
-        if(turno == Giocatore.gX){
-            statusVittoria = "O - Ha Vinto; X si è Arreso";
+        if(turno.equals(Giocatore.gX)){
+            if(resaConta > 1){
+                statusVittoria = "Ti sei già Arreso!";
+            } else{
+                statusVittoria = "O - Ha Vinto; X si è Arreso";
+            }
             testo.setForeground(Color.BLACK);
             testo.setText(statusVittoria);
-        } else if(turno == Giocatore.gO){
-            statusVittoria = "X - Ha Vinto; O si è Arreso";
+        } else if(turno.equals(Giocatore.gO)){
+            if(resaConta > 1){
+                statusVittoria = "Ti sei già Arreso!";
+            } else{
+                statusVittoria = "X - Ha Vinto; O si è Arreso";
+            }
             testo.setForeground(Color.BLACK);
             testo.setText(statusVittoria);
         }

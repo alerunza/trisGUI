@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 
 public class Window extends JFrame {
 
-    public Giocatore turno = Giocatore.gX;
+    public String turno = Giocatore.gX;
 
     JButton[] btn = new JButton[9];
     JPanel panel = new JPanel(), sezioneInfo = new JPanel();;

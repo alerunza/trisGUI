@@ -1,14 +1,5 @@
-public enum Giocatore {
-    gX("X"),
-    gO("O");
+public class Giocatore {
 
-    private String abbreviation;
-
-    Giocatore(String abbreviation){
-        this.abbreviation = abbreviation;
-    }
-
-    public String getAbbreviation(){
-        return this.abbreviation;
-    }
+    public static final String gX = "X";
+    public static final String gO = "O";
 }
