@@ -7,13 +7,9 @@ import java.awt.event.KeyEvent;
 public class Tris extends Window {
 
     private boolean state = true; // state of the game
-    private String playerChar;
     private Player turn = Player.GiocatoreX;
 
-
-    public String getPlayerChar() {
-        return playerChar;
-    }
+    public String statusVittoria = "";
 
     /** Create a working TicTacToe game*/
     public Tris(String title) throws HeadlessException {
@@ -64,27 +60,6 @@ public class Tris extends Window {
         return new int[]{0};
     }
 
-    /** Set the state of the game*/
-    public void setState(boolean state) {
-        this.state = state;
-    }
-
-    /** Set the turn to a Player*/
-    public void setTurn(Player turn) {
-        this.turn = turn;
-    }
-
-    /** Returns the state of the game*/
-    public boolean isState() {
-        return state;
-    }
-
-    /** Returns Player's turn*/
-
-    public Player getTurn() {
-        return turn;
-    }
-
 
     /** Actions to do when the button is pressed */
     @Override
@@ -103,7 +78,10 @@ public class Tris extends Window {
                 // checking if X won
                 if (win()[0] == 1) {
                     int[] pos = new int[]{win()[1], win()[2], win()[3]};
-                    mainText.setText("X - Ha Vinto");
+
+                    statusVittoria = "X - Ha Vinto";
+
+                    mainText.setText(statusVittoria);
                     state = false;
 
                     // setting win combination to green
@@ -118,6 +96,7 @@ public class Tris extends Window {
                 // otherwise we go onto the next player after checking the tie
                 else {
                     if (tie()) {
+                        mainText.setForeground(Color.BLACK);
                         mainText.setText("Pareggio");
                         state = false;
                         popupReset();
@@ -136,11 +115,12 @@ public class Tris extends Window {
                 button.setForeground(Color.RED);
                 button.setText("O");
 
-
                 if (win()[0] == 1) {
                     int[] pos = new int[]{win()[1], win()[2], win()[3]};
 
-                    mainText.setText("O - Ha Vinto");
+                    statusVittoria = "O - Ha Vinto";
+
+                    mainText.setText(statusVittoria);
                     state = false;
 
                     for (int po : pos){
@@ -152,6 +132,7 @@ public class Tris extends Window {
                     popupReset();
                 } else {
                     if (tie()) {
+                        mainText.setForeground(Color.BLACK);
                         mainText.setText("Pareggio");
                         popupReset();
                         state = false;
@@ -169,9 +150,15 @@ public class Tris extends Window {
     /** Popup that ask for restarting the game*/
     public void popupReset() {
         String[] scelta = new String[] {"Si", "No"};
+        String messaggio = "";
+        if(tie()){
+            messaggio = "Status: Pareggio" + "\n" + "Vuoi Riavviare la Partita?";
+        } else if(win()[0] == 1){
+            messaggio = "Status: " + statusVittoria + "\n" + "Vuoi Riavviare la Partita?";
+        }
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showOptionDialog(this,
-                "Vuoi riavviare la partita?",
+                messaggio,
                 "Fine della Partita",
                 dialogButton,
                 JOptionPane.INFORMATION_MESSAGE,
@@ -201,9 +188,10 @@ public class Tris extends Window {
 
     /** Handle the keyboard input, currently supporting "R" to restart and "A" to toggle the AI*/
     private void keyHandler(KeyEvent e) {
-        int key = e.getKeyCode();
+        int tasto = e.getKeyCode();
 
-        if (key == KeyEvent.VK_R) {
+        // Se è premuto R, il gioco si riavvierà
+        if (tasto == KeyEvent.VK_R) {
             reset();
         }
     }
