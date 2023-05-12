@@ -6,7 +6,8 @@ import java.awt.event.KeyEvent;
 
 public class Tris extends Window {
 
-    private boolean state = true; // state of the game
+    private boolean statusPartita = true;
+    private boolean resa = false;
     public String statusVittoria = "";
 
     public Tris(String title) {
@@ -34,7 +35,7 @@ public class Tris extends Window {
 
    /** fa il controllo se ha vinto. Resituisce nella posizone 0, 1 per verificare la vittoria e poi le altre 3
     posizioni sono la combinazione vincente.  */
-    public int[] win() {
+    public int[] vittoria() {
         if (btn[0].getText().equals(btn[1].getText()) && btn[2].getText().equals(btn[0].getText()) && !btn[0].getText().equals("")){
             return new int[]{1, 0, 1, 2};
         } else if (btn[3].getText().equals(btn[4].getText()) && btn[5].getText().equals(btn[3].getText()) && !btn[3].getText().equals("")){
@@ -64,7 +65,7 @@ public class Tris extends Window {
 
 
         // while the game is running
-        if (state) {
+        if (statusPartita) {
                 // if GiocatoreX played  an empty button then make the move
             if (turno == Giocatore.gX && button.getText().equals("")) {
                 button.setForeground(Color.BLUE);
@@ -72,33 +73,34 @@ public class Tris extends Window {
                 button.setText("X");
 
                 // checking if X won
-                if (win()[0] == 1) {
-                    int[] pos = new int[]{win()[1], win()[2], win()[3]};
+                if (vittoria()[0] == 1) {
+                    int[] pos = new int[]{vittoria()[1], vittoria()[2], vittoria()[3]};
 
                     statusVittoria = "X - Ha Vinto";
 
                     testo.setText(statusVittoria);
-                    state = false;
+                    statusPartita = false;
 
                     // setting win combination to green
-                    for (int po : pos){
-                        btn[po].setOpaque(true);
-                        btn[po].setBorderPainted(false);
-                        btn[po].setBackground(Color.GREEN);
+                    for (int p : pos){ // for-each
+                        btn[p].setOpaque(true);
+                        btn[p].setBorderPainted(false);
+                        btn[p].setBackground(Color.GREEN);
                     }
 
                     popupReset();
                 }
                 // otherwise we go onto the next player after checking the tie
                 else {
-                    if (tie()) {
+                    if (pareggio()) {
                         testo.setForeground(Color.BLACK);
-                        testo.setText("Pareggio");
-                        state = false;
+                        statusVittoria = "Pareggio";
+                        testo.setText(statusVittoria);
+                        statusPartita = false;
                         popupReset();
-                    }else {
+                    } else{
                             turno = Giocatore.gO;
-                        if (state){
+                        if (statusPartita){
                             testo.setForeground(Color.RED);
                             testo.setText(turno.getAbbreviation() + " - Turno");
                         }
@@ -111,30 +113,31 @@ public class Tris extends Window {
                 button.setForeground(Color.RED);
                 button.setText("O");
 
-                if (win()[0] == 1) {
-                    int[] pos = new int[]{win()[1], win()[2], win()[3]};
+                if (vittoria()[0] == 1) {
+                    int[] pos = new int[]{vittoria()[1], vittoria()[2], vittoria()[3]};
 
                     statusVittoria = "O - Ha Vinto";
 
                     testo.setText(statusVittoria);
-                    state = false;
+                    statusPartita = false;
 
-                    for (int po : pos){
-                        btn[po].setOpaque(true);
-                        btn[po].setBorderPainted(false);
-                        btn[po].setBackground(Color.GREEN);
+                    for (int p : pos){
+                        btn[p].setOpaque(true);
+                        btn[p].setBorderPainted(false);
+                        btn[p].setBackground(Color.GREEN);
                     }
 
                     popupReset();
                 } else {
-                    if (tie()) {
+                    if (pareggio()) {
                         testo.setForeground(Color.BLACK);
-                        testo.setText("Pareggio");
+                        statusVittoria = "Pareggio";
+                        testo.setText(statusVittoria);
                         popupReset();
-                        state = false;
+                        statusPartita = false;
                     }
                     turno = Giocatore.gX;
-                    if (state){
+                    if (statusPartita){
                         testo.setForeground(Color.BLUE);
                         testo.setText(turno.getAbbreviation() + " - Turno");
                     }
@@ -146,11 +149,14 @@ public class Tris extends Window {
     /** Popup that ask for restarting the game*/
     public void popupReset() {
         String[] scelte = new String[] {"Si", "No"};
-        String messaggio = "";
-        if(tie()){
-            messaggio = "Status: Pareggio" + "\n" + "Vuoi Riavviare la Partita?";
-        } else if(win()[0] == 1){
-            messaggio = "Status: " + statusVittoria + "\n" + "Vuoi Riavviare la Partita?";
+        String messaggio = "", riavvioMes = "Vuoi Riavviare la Partita?";
+        if(pareggio()){
+            messaggio = "Status: "+ statusVittoria + "\n" + riavvioMes;
+        } else if(vittoria()[0] == 1){
+            messaggio = "Status: " + statusVittoria + "\n" + riavvioMes;
+        }
+        if(resa){
+            messaggio = "Status: " + statusVittoria + "\n" + riavvioMes;
         }
         int btn = JOptionPane.YES_NO_OPTION;
         int scelta = JOptionPane.showOptionDialog(this, messaggio, "Fine della Partita", btn, JOptionPane.INFORMATION_MESSAGE, null, scelte, scelte[0]);
@@ -159,7 +165,7 @@ public class Tris extends Window {
         }
     }
 
-    /** Restart the game*/
+    /* Restart the game */
     private void reset() {
 
         // reset the buttons
@@ -167,6 +173,7 @@ public class Tris extends Window {
             btn[i].setText("");
             btn[i].setBackground(null);
         }
+
         sceltaGiocatore();
 
         if(turno == Giocatore.gX){
@@ -175,12 +182,12 @@ public class Tris extends Window {
             testo.setForeground(Color.RED);
         }
 
-        state = true;
+        statusPartita = true;
         testo.setText(turno.getAbbreviation() + " - Turno");
     }
 
 
-    /** Handle the keyboard input, currently supporting "R" to restart and "A" to toggle the AI*/
+    /* Handle the keyboard input, currently supporting "R" to restart */
     private void keyHandler(KeyEvent e) {
         int tasto = e.getKeyCode();
 
@@ -188,19 +195,37 @@ public class Tris extends Window {
         if (tasto == KeyEvent.VK_R) {
             reset();
         }
+        if (tasto == KeyEvent.VK_A) {
+            resa = true;
+            resaDeiConti();
+        }
     }
 
     /** retuning if it's tie or not*/
-    public boolean tie(){
-        int emptyCase = 0;
-        if (win()[0] == 0) {
+    public boolean pareggio(){
+        int caselleVuote = 0;
+        if (vittoria()[0] == 0) {
             for (int i = 0; i < 9; i++) {
                 if (!btn[i].getText().equals(""))
-                    emptyCase += 1;
+                    caselleVuote += 1;
 
             }
         }
-        return emptyCase == 9;
+        return caselleVuote == 9;
+    }
+
+    public void resaDeiConti(){
+        if(turno == Giocatore.gX){
+            statusVittoria = "O - Ha Vinto; X si è Arreso";
+            testo.setForeground(Color.BLACK);
+            testo.setText(statusVittoria);
+        } else if(turno == Giocatore.gO){
+            statusVittoria = "X - Ha Vinto; O si è Arreso";
+            testo.setForeground(Color.BLACK);
+            testo.setText(statusVittoria);
+        }
+        statusPartita = false;
+        popupReset();
     }
 }
 

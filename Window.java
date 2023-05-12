@@ -4,14 +4,13 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-/**  Constructor to make a TicTacToe window with Nimbus style*/
 public class Window extends JFrame {
 
     public Giocatore turno = Giocatore.gX;
 
     JButton[] btn = new JButton[9];
-    JPanel panel = new JPanel();
-    JLabel testo;
+    JPanel panel = new JPanel(), sezioneInfo = new JPanel();;
+    JLabel testo, infoTesto1, infoTesto2;
 
     public Window(String title) {
         super(title);
@@ -21,6 +20,7 @@ public class Window extends JFrame {
         // Centra la posizione nello schermo
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
+        sezioneInfo.setLayout(new BorderLayout());
         setResizable(false);
         panel.setLayout(new GridLayout(3,3));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,10 +45,26 @@ public class Window extends JFrame {
 
         add(panel, BorderLayout.CENTER); // adding the mainPanel to the center of our window
 
-        testo = new JLabel("", SwingConstants.CENTER); // empty label for information
+        infoTesto1 = new JLabel(" Info Comandi: ", JLabel.LEFT);
+        infoTesto2 = new JLabel("R - Riavvia la Partita | A - Arrenditi ", JLabel.LEFT);
+
+        infoTesto1.setFont(new Font("Arial", Font.BOLD, 16));
+        infoTesto1.setForeground(Color.RED);
+
+        infoTesto2.setFont(new Font("Arial", Font.BOLD, 16));
+        infoTesto2.setForeground(Color.BLACK);
+
+        sezioneInfo.add(infoTesto1, BorderLayout.WEST);
+        sezioneInfo.add(infoTesto2, BorderLayout.EAST);
+
+
+        testo = new JLabel("", JLabel.CENTER);
+
         testo.setFont(new Font("Arial", Font.BOLD, 16));
-        testo.setPreferredSize(new Dimension(0,25));
         testo.setForeground(Color.BLUE);
+
+        add(sezioneInfo, BorderLayout.NORTH);
+
         add(testo, BorderLayout.SOUTH);
 
         setVisible(true);
