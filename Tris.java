@@ -7,16 +7,19 @@ import java.awt.event.KeyEvent;
 public class Tris extends Window {
 
     private boolean state = true; // state of the game
-    private Giocatore turn = Giocatore.gX;
-
     public String statusVittoria = "";
 
     public Tris(String title) {
         super(title);
 
-        mainText.setText(turn.getAbbreviation() + " - Turno");
+        if(turno == Giocatore.gX){
+            testo.setForeground(Color.BLUE);
+        } else if(turno == Giocatore.gO){
+            testo.setForeground(Color.RED);
+        }
+        testo.setText(turno.getAbbreviation() + " - Turno");
 
-        // this is needed for the keyEvent
+        // è necessario per il KeyEvent
         this.setFocusable(true);
 
         this.addKeyListener(new KeyAdapter() {
@@ -32,21 +35,21 @@ public class Tris extends Window {
    /** fa il controllo se ha vinto. Resituisce nella posizone 0, 1 per verificare la vittoria e poi le altre 3
     posizioni sono la combinazione vincente.  */
     public int[] win() {
-        if (buttons[0].getText().equals(buttons[1].getText()) && buttons[2].getText().equals(buttons[0].getText()) && !buttons[0].getText().equals("")){
+        if (btn[0].getText().equals(btn[1].getText()) && btn[2].getText().equals(btn[0].getText()) && !btn[0].getText().equals("")){
             return new int[]{1, 0, 1, 2};
-        } else if (buttons[3].getText().equals(buttons[4].getText()) && buttons[5].getText().equals(buttons[3].getText()) && !buttons[3].getText().equals("")){
+        } else if (btn[3].getText().equals(btn[4].getText()) && btn[5].getText().equals(btn[3].getText()) && !btn[3].getText().equals("")){
             return new int[]{1, 3, 4, 5};
-        } else if (buttons[6].getText().equals(buttons[7].getText()) && buttons[8].getText().equals(buttons[6].getText()) && !buttons[6].getText().equals("")){
+        } else if (btn[6].getText().equals(btn[7].getText()) && btn[8].getText().equals(btn[6].getText()) && !btn[6].getText().equals("")){
             return new int[]{1, 6, 7, 8};
-        } else if (buttons[0].getText().equals(buttons[3].getText()) && buttons[6].getText().equals(buttons[0].getText()) && !buttons[0].getText().equals("")){
+        } else if (btn[0].getText().equals(btn[3].getText()) && btn[6].getText().equals(btn[0].getText()) && !btn[0].getText().equals("")){
             return new int[]{1, 0, 3, 6};
-        } else if (buttons[1].getText().equals(buttons[4].getText()) && buttons[7].getText().equals(buttons[1].getText()) && !buttons[1].getText().equals("")){
+        } else if (btn[1].getText().equals(btn[4].getText()) && btn[7].getText().equals(btn[1].getText()) && !btn[1].getText().equals("")){
             return new int[]{1, 1, 4, 7};
-        } else if (buttons[2].getText().equals(buttons[5].getText()) && buttons[8].getText().equals(buttons[2].getText()) && !buttons[2].getText().equals("")){
+        } else if (btn[2].getText().equals(btn[5].getText()) && btn[8].getText().equals(btn[2].getText()) && !btn[2].getText().equals("")){
             return new int[]{1, 2, 5, 8};
-        } else if (buttons[0].getText().equals(buttons[4].getText()) && buttons[8].getText().equals(buttons[0].getText()) && !buttons[0].getText().equals("")){
+        } else if (btn[0].getText().equals(btn[4].getText()) && btn[8].getText().equals(btn[0].getText()) && !btn[0].getText().equals("")){
             return new int[]{1, 0, 4, 8};
-        } else if (buttons[2].getText().equals(buttons[4].getText()) && buttons[6].getText().equals(buttons[2].getText()) && !buttons[2].getText().equals("")){
+        } else if (btn[2].getText().equals(btn[4].getText()) && btn[6].getText().equals(btn[2].getText()) && !btn[2].getText().equals("")){
             return new int[]{1, 2, 4, 6};
         }
         //se non ha vinto resituisce 0, ovvero che ha perso
@@ -63,9 +66,9 @@ public class Tris extends Window {
         // while the game is running
         if (state) {
                 // if GiocatoreX played  an empty button then make the move
-            if (turn == Giocatore.gX && button.getText().equals("")) {
+            if (turno == Giocatore.gX && button.getText().equals("")) {
                 button.setForeground(Color.BLUE);
-                button.setFont(new Font("duran", Font.PLAIN, 36));
+                button.setFont(new Font("Arial", Font.PLAIN, 36));
                 button.setText("X");
 
                 // checking if X won
@@ -74,14 +77,14 @@ public class Tris extends Window {
 
                     statusVittoria = "X - Ha Vinto";
 
-                    mainText.setText(statusVittoria);
+                    testo.setText(statusVittoria);
                     state = false;
 
                     // setting win combination to green
                     for (int po : pos){
-                        buttons[po].setOpaque(true);
-                        buttons[po].setBorderPainted(false);
-                        buttons[po].setBackground(Color.GREEN);
+                        btn[po].setOpaque(true);
+                        btn[po].setBorderPainted(false);
+                        btn[po].setBackground(Color.GREEN);
                     }
 
                     popupReset();
@@ -89,22 +92,22 @@ public class Tris extends Window {
                 // otherwise we go onto the next player after checking the tie
                 else {
                     if (tie()) {
-                        mainText.setForeground(Color.BLACK);
-                        mainText.setText("Pareggio");
+                        testo.setForeground(Color.BLACK);
+                        testo.setText("Pareggio");
                         state = false;
                         popupReset();
                     }else {
-                            turn = Giocatore.gO;
+                            turno = Giocatore.gO;
                         if (state){
-                            mainText.setForeground(Color.RED);
-                            mainText.setText(turn.getAbbreviation() + " - Turno");
+                            testo.setForeground(Color.RED);
+                            testo.setText(turno.getAbbreviation() + " - Turno");
                         }
                     }
                 }
 
             }
             // same for the O Player
-            else if (turn == Giocatore.gO && button.getText().equals("")) {
+            else if (turno == Giocatore.gO && button.getText().equals("")) {
                 button.setForeground(Color.RED);
                 button.setText("O");
 
@@ -113,27 +116,27 @@ public class Tris extends Window {
 
                     statusVittoria = "O - Ha Vinto";
 
-                    mainText.setText(statusVittoria);
+                    testo.setText(statusVittoria);
                     state = false;
 
                     for (int po : pos){
-                        buttons[po].setOpaque(true);
-                        buttons[po].setBorderPainted(false);
-                        buttons[po].setBackground(Color.GREEN);
+                        btn[po].setOpaque(true);
+                        btn[po].setBorderPainted(false);
+                        btn[po].setBackground(Color.GREEN);
                     }
 
                     popupReset();
                 } else {
                     if (tie()) {
-                        mainText.setForeground(Color.BLACK);
-                        mainText.setText("Pareggio");
+                        testo.setForeground(Color.BLACK);
+                        testo.setText("Pareggio");
                         popupReset();
                         state = false;
                     }
-                    turn = Giocatore.gX;
+                    turno = Giocatore.gX;
                     if (state){
-                        mainText.setForeground(Color.BLUE);
-                        mainText.setText(turn.getAbbreviation() + " - Turno");
+                        testo.setForeground(Color.BLUE);
+                        testo.setText(turno.getAbbreviation() + " - Turno");
                     }
                 }
             }
@@ -142,23 +145,16 @@ public class Tris extends Window {
 
     /** Popup that ask for restarting the game*/
     public void popupReset() {
-        String[] scelta = new String[] {"Si", "No"};
+        String[] scelte = new String[] {"Si", "No"};
         String messaggio = "";
         if(tie()){
             messaggio = "Status: Pareggio" + "\n" + "Vuoi Riavviare la Partita?";
         } else if(win()[0] == 1){
             messaggio = "Status: " + statusVittoria + "\n" + "Vuoi Riavviare la Partita?";
         }
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showOptionDialog(this,
-                messaggio,
-                "Fine della Partita",
-                dialogButton,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                scelta,
-                scelta[0]);
-        if (dialogResult == JOptionPane.YES_OPTION) {
+        int btn = JOptionPane.YES_NO_OPTION;
+        int scelta = JOptionPane.showOptionDialog(this, messaggio, "Fine della Partita", btn, JOptionPane.INFORMATION_MESSAGE, null, scelte, scelte[0]);
+        if (scelta == JOptionPane.YES_OPTION) {
             reset();
         }
     }
@@ -168,14 +164,19 @@ public class Tris extends Window {
 
         // reset the buttons
         for (int i = 0; i < 9; i++) {
-            buttons[i].setText("");
-            buttons[i].setBackground(null);
+            btn[i].setText("");
+            btn[i].setBackground(null);
         }
-        turn = Giocatore.gX;
+        sceltaGiocatore();
+
+        if(turno == Giocatore.gX){
+            testo.setForeground(Color.BLUE);
+        } else if(turno == Giocatore.gO){
+            testo.setForeground(Color.RED);
+        }
 
         state = true;
-        mainText.setForeground(Color.BLUE);
-        mainText.setText(turn.getAbbreviation() + " - Turno");
+        testo.setText(turno.getAbbreviation() + " - Turno");
     }
 
 
@@ -194,7 +195,7 @@ public class Tris extends Window {
         int emptyCase = 0;
         if (win()[0] == 0) {
             for (int i = 0; i < 9; i++) {
-                if (!buttons[i].getText().equals(""))
+                if (!btn[i].getText().equals(""))
                     emptyCase += 1;
 
             }
