@@ -30,33 +30,27 @@ public class Tris extends Window {
 
 
 
-   /** Checking if someone won. The first index return 1 or 0 to check the win and then the next 3
-    * values are the winning combination  */
+   /** fa il controllo se ha vinto. Resituisce nella posizone 0, 1 per verificare la vittoria e poi le altre 3
+    posizioni sono la combinazione vincente.  */
     public int[] win() {
-        if (buttons[0].getText().equals(buttons[1].getText()) && buttons[2].getText().equals(buttons[0].getText())
-                && !buttons[0].getText().equals(""))
+        if (buttons[0].getText().equals(buttons[1].getText()) && buttons[2].getText().equals(buttons[0].getText()) && !buttons[0].getText().equals("")){
             return new int[]{1, 0, 1, 2};
-        else if (buttons[3].getText().equals(buttons[4].getText()) && buttons[5].getText().equals(buttons[3].getText()) &&
-                !buttons[3].getText().equals(""))
+        } else if (buttons[3].getText().equals(buttons[4].getText()) && buttons[5].getText().equals(buttons[3].getText()) && !buttons[3].getText().equals("")){
             return new int[]{1, 3, 4, 5};
-        else if (buttons[6].getText().equals(buttons[7].getText()) && buttons[8].getText().equals(buttons[6].getText()) &&
-                !buttons[6].getText().equals(""))
+        } else if (buttons[6].getText().equals(buttons[7].getText()) && buttons[8].getText().equals(buttons[6].getText()) && !buttons[6].getText().equals("")){
             return new int[]{1, 6, 7, 8};
-        else if (buttons[0].getText().equals(buttons[3].getText()) && buttons[6].getText().equals(buttons[0].getText()) &&
-                !buttons[0].getText().equals(""))
+        } else if (buttons[0].getText().equals(buttons[3].getText()) && buttons[6].getText().equals(buttons[0].getText()) && !buttons[0].getText().equals("")){
             return new int[]{1, 0, 3, 6};
-        else if (buttons[1].getText().equals(buttons[4].getText()) && buttons[7].getText().equals(buttons[1].getText()) &&
-                !buttons[1].getText().equals(""))
+        } else if (buttons[1].getText().equals(buttons[4].getText()) && buttons[7].getText().equals(buttons[1].getText()) && !buttons[1].getText().equals("")){
             return new int[]{1, 1, 4, 7};
-        else if (buttons[2].getText().equals(buttons[5].getText()) && buttons[8].getText().equals(buttons[2].getText()) &&
-                !buttons[2].getText().equals(""))
+        } else if (buttons[2].getText().equals(buttons[5].getText()) && buttons[8].getText().equals(buttons[2].getText()) && !buttons[2].getText().equals("")){
             return new int[]{1, 2, 5, 8};
-        else if (buttons[0].getText().equals(buttons[4].getText()) && buttons[8].getText().equals(buttons[0].getText()) &&
-                !buttons[0].getText().equals(""))
+        } else if (buttons[0].getText().equals(buttons[4].getText()) && buttons[8].getText().equals(buttons[0].getText()) && !buttons[0].getText().equals("")){
             return new int[]{1, 0, 4, 8};
-        else if (buttons[2].getText().equals(buttons[4].getText()) && buttons[6].getText().equals(buttons[2].getText()) &&
-                !buttons[2].getText().equals(""))
+        } else if (buttons[2].getText().equals(buttons[4].getText()) && buttons[6].getText().equals(buttons[2].getText()) && !buttons[2].getText().equals("")){
             return new int[]{1, 2, 4, 6};
+        }
+        //se non ha vinto resituisce 0, ovvero che ha perso
         return new int[]{0};
     }
 
