@@ -1,10 +1,10 @@
-public enum Player {
-    GiocatoreX("X"),
-    GiocatoreO("O");
+public enum Giocatore {
+    gX("X"),
+    gO("O");
 
     private String abbreviation;
 
-    Player(String abbreviation){
+    Giocatore(String abbreviation){
         this.abbreviation = abbreviation;
     }
 

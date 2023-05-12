@@ -7,12 +7,11 @@ import java.awt.event.KeyEvent;
 public class Tris extends Window {
 
     private boolean state = true; // state of the game
-    private Player turn = Player.GiocatoreX;
+    private Giocatore turn = Giocatore.gX;
 
     public String statusVittoria = "";
 
-    /** Create a working TicTacToe game*/
-    public Tris(String title) throws HeadlessException {
+    public Tris(String title) {
         super(title);
 
         mainText.setText(turn.getAbbreviation() + " - Turno");
@@ -64,7 +63,7 @@ public class Tris extends Window {
         // while the game is running
         if (state) {
                 // if GiocatoreX played  an empty button then make the move
-            if (turn == Player.GiocatoreX && button.getText().equals("")) {
+            if (turn == Giocatore.gX && button.getText().equals("")) {
                 button.setForeground(Color.BLUE);
                 button.setFont(new Font("duran", Font.PLAIN, 36));
                 button.setText("X");
@@ -95,7 +94,7 @@ public class Tris extends Window {
                         state = false;
                         popupReset();
                     }else {
-                            turn = Player.GiocatoreO;
+                            turn = Giocatore.gO;
                         if (state){
                             mainText.setForeground(Color.RED);
                             mainText.setText(turn.getAbbreviation() + " - Turno");
@@ -105,7 +104,7 @@ public class Tris extends Window {
 
             }
             // same for the O Player
-            else if (turn == Player.GiocatoreO && button.getText().equals("")) {
+            else if (turn == Giocatore.gO && button.getText().equals("")) {
                 button.setForeground(Color.RED);
                 button.setText("O");
 
@@ -131,7 +130,7 @@ public class Tris extends Window {
                         popupReset();
                         state = false;
                     }
-                    turn = Player.GiocatoreX;
+                    turn = Giocatore.gX;
                     if (state){
                         mainText.setForeground(Color.BLUE);
                         mainText.setText(turn.getAbbreviation() + " - Turno");
@@ -172,7 +171,7 @@ public class Tris extends Window {
             buttons[i].setText("");
             buttons[i].setBackground(null);
         }
-        turn = Player.GiocatoreX;
+        turn = Giocatore.gX;
 
         state = true;
         mainText.setForeground(Color.BLUE);
