@@ -3,7 +3,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Objects;
+
+class Giocatore {
+    public static final String gX = "X";
+    public static final String gO = "O";
+}
 
 public class Tris extends Window {
 
