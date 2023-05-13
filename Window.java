@@ -10,7 +10,7 @@ public class Window extends JFrame {
 
     JButton[] btn = new JButton[9];
     JPanel panel = new JPanel(), sezioneInfo = new JPanel();;
-    JLabel testo, infoTesto1, infoTesto2;
+    JLabel testo, infoTesto1, infoTesto2, punteggio;
 
     public Window(String title) {
         super(title);
@@ -81,6 +81,9 @@ public class Window extends JFrame {
         int btn = JOptionPane.YES_NO_OPTION;
         int scelta = JOptionPane.showOptionDialog(this, messaggio, "Inizio Partita", btn, JOptionPane.INFORMATION_MESSAGE, null, scelte, scelte[0]);
 
+        if(scelta == JOptionPane.CLOSED_OPTION){
+            sceltaGiocatore();
+        }
         if(scelta == JOptionPane.YES_OPTION){
             turno = Giocatore.gX;
         } else if(scelta == JOptionPane.NO_OPTION){
