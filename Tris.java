@@ -84,6 +84,10 @@ public class Tris extends Window {
 
                     statusVittoria = "X - Ha Vinto";
 
+                    punteggioX++;
+                    //System.out.println(punteggioX);
+                    puntiX.setText(String.valueOf(punteggioX));
+
                     testo.setText(statusVittoria);
                     statusPartita = false;
 
@@ -123,6 +127,10 @@ public class Tris extends Window {
                     int[] pos = new int[]{vittoria()[1], vittoria()[2], vittoria()[3]};
 
                     statusVittoria = "O - Ha Vinto";
+
+                    punteggioO++;
+                    //System.out.println(punteggioO);
+                    puntiO.setText(String.valueOf(punteggioO));
 
                     testo.setText(statusVittoria);
                     statusPartita = false;
@@ -207,6 +215,13 @@ public class Tris extends Window {
             resa = true;
             resaConta++;
             resaDeiConti();
+        }
+        if (tasto == KeyEvent.VK_C) {
+            punteggioX = 0;
+            puntiX.setText(String.valueOf(punteggioX));
+            punteggioO = 0;
+            puntiO.setText(String.valueOf(punteggioO));
+            reset();
         }
     }
 

@@ -12,6 +12,8 @@ public class Window extends JFrame {
     JPanel panel = new JPanel(), sezioneInfo = new JPanel(), sezionePunteggio = new JPanel();
     JLabel testo, infoTesto1, infoTesto2, imgX, imgO, puntiX, puntiO;
 
+    public int punteggioX = 0, punteggioO = 0;
+
     public Window(String title) {
         super(title);
 
@@ -47,24 +49,24 @@ public class Window extends JFrame {
         add(panel, BorderLayout.CENTER); // adding the mainPanel to the center of our window
 
         infoTesto1 = new JLabel(" Info Comandi: ", JLabel.LEFT);
-        infoTesto2 = new JLabel("R - Riavvia la Partita | A - Arrenditi ", JLabel.LEFT);
+        infoTesto2 = new JLabel("R - Riavvia la Partita | A - Arrenditi | C - Resetta Punteggio ", JLabel.LEFT);
 
         imgX = new JLabel("X: ");
         imgX.setFont(new Font("Arial", Font.BOLD, 24));
         imgX.setForeground(Color.BLUE);
-        puntiX = new JLabel("3");
+        puntiX = new JLabel(String.valueOf(punteggioX));
         puntiX.setFont(new Font("Arial", Font.PLAIN, 20));
 
         imgO = new JLabel("O: ");
         imgO.setFont(new Font("Arial", Font.BOLD, 24));
         imgO.setForeground(Color.RED);
-        puntiO = new JLabel("2");
+        puntiO = new JLabel(String.valueOf(punteggioO));
         puntiO.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        infoTesto1.setFont(new Font("Arial", Font.BOLD, 16));
+        infoTesto1.setFont(new Font("Arial", Font.BOLD, 14));
         infoTesto1.setForeground(Color.RED);
 
-        infoTesto2.setFont(new Font("Arial", Font.BOLD, 16));
+        infoTesto2.setFont(new Font("Arial", Font.BOLD, 12));
         infoTesto2.setForeground(Color.BLACK);
 
         sezioneInfo.add(infoTesto1, BorderLayout.WEST);
