@@ -9,8 +9,8 @@ public class Window extends JFrame {
     public String turno = Giocatore.gX;
 
     JButton[] btn = new JButton[9];
-    JPanel panel = new JPanel(), sezioneInfo = new JPanel();;
-    JLabel testo, infoTesto1, infoTesto2, punteggio;
+    JPanel panel = new JPanel(), sezioneInfo = new JPanel(), sezionePunteggio = new JPanel();
+    JLabel testo, infoTesto1, infoTesto2, imgX, imgO, puntiX, puntiO;
 
     public Window(String title) {
         super(title);
@@ -21,6 +21,7 @@ public class Window extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         sezioneInfo.setLayout(new BorderLayout());
+        sezionePunteggio.setLayout(new GridLayout(2, 2));
         setResizable(false);
         panel.setLayout(new GridLayout(3,3));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -37,7 +38,7 @@ public class Window extends JFrame {
         for (int i = 0; i < 9; i++) {
             btn[i] = new JButton("");
             btn[i].setBackground(null);
-            btn[i].setFont(new Font("duran", Font.PLAIN, 36));
+            btn[i].setFont(new Font("Arial", Font.PLAIN, 36));
             btn[i].setFocusable(false); // making sure they can't be focused (like with tab)
             btn[i].addActionListener(this::actionPerformed); // adding an action listener for when we press it
             panel.add(btn[i]); // adding buttons to our mainPanel 3 by 3 grid
@@ -48,6 +49,18 @@ public class Window extends JFrame {
         infoTesto1 = new JLabel(" Info Comandi: ", JLabel.LEFT);
         infoTesto2 = new JLabel("R - Riavvia la Partita | A - Arrenditi ", JLabel.LEFT);
 
+        imgX = new JLabel("X: ");
+        imgX.setFont(new Font("Arial", Font.BOLD, 24));
+        imgX.setForeground(Color.BLUE);
+        puntiX = new JLabel("3");
+        puntiX.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        imgO = new JLabel("O: ");
+        imgO.setFont(new Font("Arial", Font.BOLD, 24));
+        imgO.setForeground(Color.RED);
+        puntiO = new JLabel("2");
+        puntiO.setFont(new Font("Arial", Font.PLAIN, 20));
+
         infoTesto1.setFont(new Font("Arial", Font.BOLD, 16));
         infoTesto1.setForeground(Color.RED);
 
@@ -57,6 +70,10 @@ public class Window extends JFrame {
         sezioneInfo.add(infoTesto1, BorderLayout.WEST);
         sezioneInfo.add(infoTesto2, BorderLayout.EAST);
 
+        sezionePunteggio.add(imgX);
+        sezionePunteggio.add(puntiX);
+        sezionePunteggio.add(imgO);
+        sezionePunteggio.add(puntiO);
 
         testo = new JLabel("", JLabel.CENTER);
 
@@ -64,7 +81,7 @@ public class Window extends JFrame {
         testo.setForeground(Color.BLUE);
 
         add(sezioneInfo, BorderLayout.NORTH);
-
+        add(sezionePunteggio, BorderLayout.EAST);
         add(testo, BorderLayout.SOUTH);
 
         setVisible(true);
