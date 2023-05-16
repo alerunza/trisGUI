@@ -110,7 +110,7 @@ public class Tris extends Window {
                         statusPartita = false;
                         popupReset();
                     } else{
-                            turno = Giocatore.gO;
+                        turno = Giocatore.gO;
                         if (statusPartita){
                             testo.setForeground(Color.RED);
                             testo.setText(turno + " - Turno");
@@ -150,11 +150,12 @@ public class Tris extends Window {
                         testo.setText(statusVittoria);
                         popupReset();
                         statusPartita = false;
-                    }
-                    turno = Giocatore.gX;
-                    if (statusPartita){
-                        testo.setForeground(Color.BLUE);
-                        testo.setText(turno + " - Turno");
+                    }else{
+                        turno = Giocatore.gX;
+                        if (statusPartita){
+                            testo.setForeground(Color.BLUE);
+                            testo.setText(turno + " - Turno");
+                        }
                     }
                 }
             }
@@ -226,16 +227,13 @@ public class Tris extends Window {
         }
     }
 
-    public boolean pareggio(){
-        int caselleVuote = 0;
-        if (vittoria()[0] == 0) {
-            for (int i = 0; i < 9; i++) {
-                if (!btn[i].getText().equals(""))
-                    caselleVuote += 1;
-
+    public boolean pareggio() {
+        for (int i = 0; i < 9; i++) {
+            if (btn[i].getText().equals("")) {
+                return false;
             }
         }
-        return caselleVuote == 9;
+        return true;
     }
 
     public void resaDeiConti(){
