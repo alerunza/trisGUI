@@ -42,12 +42,12 @@ public class Window extends JFrame implements ActionListener  {
             btn[i] = new JButton("");
             btn[i].setBackground(null);
             btn[i].setFont(new Font("Arial", Font.PLAIN, 36));
-            btn[i].setFocusable(false); // making sure they can't be focused (like with tab)
-            btn[i].addActionListener(this); // adding an action listener for when we press it
-            panel.add(btn[i]); // adding buttons to our mainPanel 3 by 3 grid
+            btn[i].setFocusable(false);
+            btn[i].addActionListener(this);
+            panel.add(btn[i]);
         }
 
-        add(panel, BorderLayout.CENTER); // adding the mainPanel to the center of our window
+        add(panel, BorderLayout.CENTER);
 
         infoTesto1 = new JLabel(" Info Comandi: ", JLabel.LEFT);
         infoTesto2 = new JLabel("R - Riavvia la Partita | A - Arrenditi | C - Resetta Punteggio ", JLabel.LEFT);

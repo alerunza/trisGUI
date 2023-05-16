@@ -59,6 +59,7 @@ public class Tris extends Window {
         } else if (btn[2].getText().equals(btn[4].getText()) && btn[6].getText().equals(btn[2].getText()) && !btn[2].getText().equals("")){
             return new int[]{1, 2, 4, 6};
         }
+
         //se non ha vinto resituisce 0, ovvero che ha perso
         return new int[]{0};
     }
@@ -225,7 +226,6 @@ public class Tris extends Window {
         }
     }
 
-    /** retuning if it's tie or not*/
     public boolean pareggio(){
         int caselleVuote = 0;
         if (vittoria()[0] == 0) {
@@ -244,6 +244,8 @@ public class Tris extends Window {
                 statusVittoria = "Ti sei già Arreso!";
             } else{
                 statusVittoria = "O - Ha Vinto; X si è Arreso";
+                punteggioO++;
+                puntiO.setText(String.valueOf(punteggioO));
             }
             testo.setForeground(Color.BLACK);
             testo.setText(statusVittoria);
@@ -252,6 +254,8 @@ public class Tris extends Window {
                 statusVittoria = "Ti sei già Arreso!";
             } else{
                 statusVittoria = "X - Ha Vinto; O si è Arreso";
+                punteggioX++;
+                puntiX.setText(String.valueOf(punteggioX));
             }
             testo.setForeground(Color.BLACK);
             testo.setText(statusVittoria);
