@@ -3,8 +3,9 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Window extends JFrame {
+public class Window extends JFrame implements ActionListener  {
 
     public String turno = Giocatore.gX;
 
@@ -42,7 +43,7 @@ public class Window extends JFrame {
             btn[i].setBackground(null);
             btn[i].setFont(new Font("Arial", Font.PLAIN, 36));
             btn[i].setFocusable(false); // making sure they can't be focused (like with tab)
-            btn[i].addActionListener(this::actionPerformed); // adding an action listener for when we press it
+            btn[i].addActionListener(this); // adding an action listener for when we press it
             panel.add(btn[i]); // adding buttons to our mainPanel 3 by 3 grid
         }
 
@@ -90,7 +91,7 @@ public class Window extends JFrame {
     }
 
     /** Action to do when a button is pressed */
-    protected void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e){
 
     }
 

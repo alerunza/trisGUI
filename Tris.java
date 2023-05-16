@@ -66,7 +66,7 @@ public class Tris extends Window {
 
     /** Actions to do when the button is pressed */
     @Override
-    protected void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
 
 
