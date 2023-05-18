@@ -37,9 +37,7 @@ public class Tris extends Window {
         });
     }
 
-
-
-   /** fa il controllo se ha vinto. Resituisce nella posizone 0, 1 per verificare la vittoria e poi le altre 3
+   /* fa il controllo se ha vinto. Resituisce nella posizone 0, 1 per verificare la vittoria e poi le altre 3
     posizioni sono la combinazione vincente.  */
     public int[] vittoria() {
         if (btn[0].getText().equals(btn[1].getText()) && btn[2].getText().equals(btn[0].getText()) && !btn[0].getText().equals("")){
@@ -65,7 +63,7 @@ public class Tris extends Window {
     }
 
 
-    /** Actions to do when the button is pressed */
+    // quando il pulsante è premuto
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
@@ -73,13 +71,12 @@ public class Tris extends Window {
 
         // while the game is running
         if (statusPartita) {
-                // if GiocatoreX played  an empty button then make the move
+            // se il giocatore preme un pulsante vuoto, esso sarà quello scelto
             if (turno.equals(Giocatore.gX) && button.getText().equals("")) {
                 button.setForeground(Color.BLUE);
                 button.setFont(new Font("Arial", Font.PLAIN, 36));
                 button.setText("X");
 
-                // checking if X won
                 if (vittoria()[0] == 1) {
                     int[] pos = new int[]{vittoria()[1], vittoria()[2], vittoria()[3]};
 
@@ -92,16 +89,15 @@ public class Tris extends Window {
                     testo.setText(statusVittoria);
                     statusPartita = false;
 
-                    // setting win combination to green
-                    for (int p : pos){ // for-each
+                    // combinazione della vittoria
+                    //for (int i = 0; i < pos.length; i++)
+                    for (int p : pos) { // for-each
                         btn[p].setOpaque(true);
                         btn[p].setBorderPainted(false);
                         btn[p].setBackground(Color.GREEN);
                     }
-
                     popupReset();
                 }
-                // otherwise we go onto the next player after checking the tie
                 else {
                     if (pareggio()) {
                         testo.setForeground(Color.BLACK);
@@ -117,9 +113,7 @@ public class Tris extends Window {
                         }
                     }
                 }
-
             }
-            // same for the O Player
             else if (turno.equals(Giocatore.gO) && button.getText().equals("")) {
                 button.setForeground(Color.RED);
                 button.setText("O");
@@ -136,12 +130,13 @@ public class Tris extends Window {
                     testo.setText(statusVittoria);
                     statusPartita = false;
 
-                    for (int p : pos){
+                    // combinazione della vittoria
+                    //for (int i = 0; i < pos.length; i++)
+                    for (int p : pos) { // for-each
                         btn[p].setOpaque(true);
                         btn[p].setBorderPainted(false);
                         btn[p].setBackground(Color.GREEN);
                     }
-
                     popupReset();
                 } else {
                     if (pareggio()) {
@@ -162,7 +157,6 @@ public class Tris extends Window {
         }
     }
 
-    /** Popup that ask for restarting the game*/
     public void popupReset() {
         String[] scelte = new String[] {"Si", "No"};
         String messaggio = "", riavvioMes = "Vuoi Riavviare la Partita?";
@@ -181,10 +175,8 @@ public class Tris extends Window {
         }
     }
 
-    /* Restart the game */
     private void reset() {
 
-        // reset the buttons
         for (int i = 0; i < 9; i++) {
             btn[i].setText("");
             btn[i].setBackground(null);
@@ -204,8 +196,6 @@ public class Tris extends Window {
         testo.setText(turno + " - Turno");
     }
 
-
-    /* Handle the keyboard input, currently supporting "R" to restart */
     private void keyHandler(KeyEvent e) {
         int tasto = e.getKeyCode();
 
@@ -213,11 +203,13 @@ public class Tris extends Window {
         if (tasto == KeyEvent.VK_R) {
             reset();
         }
+        // Se è premuto A, si arrenderà
         if (tasto == KeyEvent.VK_A) {
             resa = true;
             resaConta++;
             resaDeiConti();
         }
+        // Se è premuto C, resetterà il punteggio e riavvierà la partita
         if (tasto == KeyEvent.VK_C) {
             punteggioX = 0;
             puntiX.setText(String.valueOf(punteggioX));
