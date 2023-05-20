@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Window extends JFrame implements ActionListener  {
+public class Finestra extends JFrame implements ActionListener  {
 
     public String turno = Giocatore.gX;
 
@@ -15,7 +15,7 @@ public class Window extends JFrame implements ActionListener  {
 
     public int punteggioX = 0, punteggioO = 0;
 
-    public Window(String title) {
+    public Finestra(String title) {
         super(title);
 
         // Setup Finestra
@@ -52,12 +52,14 @@ public class Window extends JFrame implements ActionListener  {
         infoTesto1 = new JLabel(" Info Comandi: ", JLabel.LEFT);
         infoTesto2 = new JLabel("R - Riavvia la Partita | A - Arrenditi | C - Resetta Punteggio ", JLabel.LEFT);
 
+        // Punteggio X
         imgX = new JLabel("X: ");
         imgX.setFont(new Font("Arial", Font.BOLD, 24));
         imgX.setForeground(Color.BLUE);
         puntiX = new JLabel(String.valueOf(punteggioX));
         puntiX.setFont(new Font("Arial", Font.PLAIN, 20));
 
+        // Punteggio O
         imgO = new JLabel("O: ");
         imgO.setFont(new Font("Arial", Font.BOLD, 24));
         imgO.setForeground(Color.RED);

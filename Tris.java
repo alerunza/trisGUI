@@ -9,7 +9,7 @@ class Giocatore {
     public static final String gO = "O";
 }
 
-public class Tris extends Window {
+public class Tris extends Finestra {
 
     private boolean statusPartita = true;
     private boolean resa = false;
@@ -68,17 +68,16 @@ public class Tris extends Window {
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
 
-
-        // while the game is running
         if (statusPartita) {
             // se il giocatore preme un pulsante vuoto, esso sarà quello scelto
+            // Giocatore X
             if (turno.equals(Giocatore.gX) && button.getText().equals("")) {
                 button.setForeground(Color.BLUE);
                 button.setFont(new Font("Arial", Font.PLAIN, 36));
                 button.setText("X");
 
                 if (vittoria()[0] == 1) {
-                    int[] pos = new int[]{vittoria()[1], vittoria()[2], vittoria()[3]};
+                    int[] posVittoria = new int[]{vittoria()[1], vittoria()[2], vittoria()[3]};
 
                     statusVittoria = "X - Ha Vinto";
 
@@ -90,11 +89,11 @@ public class Tris extends Window {
                     statusPartita = false;
 
                     // combinazione della vittoria
-                    //for (int i = 0; i < pos.length; i++)
-                    for (int p : pos) { // for-each
-                        btn[p].setOpaque(true);
-                        btn[p].setBorderPainted(false);
-                        btn[p].setBackground(Color.GREEN);
+                    //for (int i = 0; i < posVittoria.length; i++)
+                    for (int pos : posVittoria) { // for-each
+                        btn[pos].setOpaque(true);
+                        btn[pos].setBorderPainted(false);
+                        btn[pos].setBackground(Color.GREEN);
                     }
                     popupReset();
                 }
@@ -114,12 +113,13 @@ public class Tris extends Window {
                     }
                 }
             }
+            // Giocatore O
             else if (turno.equals(Giocatore.gO) && button.getText().equals("")) {
                 button.setForeground(Color.RED);
                 button.setText("O");
 
                 if (vittoria()[0] == 1) {
-                    int[] pos = new int[]{vittoria()[1], vittoria()[2], vittoria()[3]};
+                    int[] posVittoria = new int[]{vittoria()[1], vittoria()[2], vittoria()[3]};
 
                     statusVittoria = "O - Ha Vinto";
 
@@ -131,11 +131,11 @@ public class Tris extends Window {
                     statusPartita = false;
 
                     // combinazione della vittoria
-                    //for (int i = 0; i < pos.length; i++)
-                    for (int p : pos) { // for-each
-                        btn[p].setOpaque(true);
-                        btn[p].setBorderPainted(false);
-                        btn[p].setBackground(Color.GREEN);
+                    //for (int i = 0; i < posVittoria.length; i++)
+                    for (int pos : posVittoria) { // for-each
+                        btn[pos].setOpaque(true);
+                        btn[pos].setBorderPainted(false);
+                        btn[pos].setBackground(Color.GREEN);
                     }
                     popupReset();
                 } else {
@@ -145,7 +145,7 @@ public class Tris extends Window {
                         testo.setText(statusVittoria);
                         popupReset();
                         statusPartita = false;
-                    }else{
+                    } else {
                         turno = Giocatore.gX;
                         if (statusPartita){
                             testo.setForeground(Color.BLUE);
@@ -186,7 +186,7 @@ public class Tris extends Window {
 
         if(turno.equals(Giocatore.gX)){
             testo.setForeground(Color.BLUE);
-        } else if(turno.equals(Giocatore.gO) ){
+        } else if(turno.equals(Giocatore.gO)){
             testo.setForeground(Color.RED);
         }
 
@@ -197,6 +197,7 @@ public class Tris extends Window {
     }
 
     private void keyHandler(KeyEvent e) {
+        // prende il tasto dalla tastiera
         int tasto = e.getKeyCode();
 
         // Se è premuto R, il gioco si riavvierà
