@@ -16,7 +16,7 @@ public class Finestra extends JFrame implements ActionListener  {
     public int punteggioX = 0, punteggioO = 0;
 
     public Finestra(String title) {
-        super(title);
+        setTitle(title);
 
         // Setup Finestra
         setSize(450,400);
@@ -92,10 +92,8 @@ public class Finestra extends JFrame implements ActionListener  {
         setVisible(true);
     }
 
-    /** Action to do when a button is pressed */
-    public void actionPerformed(ActionEvent e){
-
-    }
+    // Azione da eseguire quando viene premuto un pulsante -> guarda Tris.java (Override)
+    public void actionPerformed(ActionEvent e){}
 
     public void sceltaGiocatore() {
         String[] scelte = new String[] {"X", "O"};

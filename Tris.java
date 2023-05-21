@@ -37,33 +37,34 @@ public class Tris extends Finestra {
         });
     }
 
-   /* fa il controllo se ha vinto. Resituisce nella posizone 0, 1 per verificare la vittoria e poi le altre 3
-    posizioni sono la combinazione vincente.  */
+    /* fa il controllo se ha vinto. Resituisce nella posizone 0, 1 per verificare la vittoria e poi le altre 3
+    posizioni sono la combinazione vincente.*/
     public int[] vittoria() {
+        // controlla se i bottoni 0, 1 e 2 hanno lo stesso testo non vuoto e li restituisce nell'array, per poi andare a fare la combinazione vincente su schermo
         if (btn[0].getText().equals(btn[1].getText()) && btn[2].getText().equals(btn[0].getText()) && !btn[0].getText().equals("")){
-            return new int[]{1, 0, 1, 2};
+            return new int[] {1, 0, 1, 2};
         } else if (btn[3].getText().equals(btn[4].getText()) && btn[5].getText().equals(btn[3].getText()) && !btn[3].getText().equals("")){
-            return new int[]{1, 3, 4, 5};
+            return new int[] {1, 3, 4, 5};
         } else if (btn[6].getText().equals(btn[7].getText()) && btn[8].getText().equals(btn[6].getText()) && !btn[6].getText().equals("")){
-            return new int[]{1, 6, 7, 8};
+            return new int[] {1, 6, 7, 8};
         } else if (btn[0].getText().equals(btn[3].getText()) && btn[6].getText().equals(btn[0].getText()) && !btn[0].getText().equals("")){
-            return new int[]{1, 0, 3, 6};
+            return new int[] {1, 0, 3, 6};
         } else if (btn[1].getText().equals(btn[4].getText()) && btn[7].getText().equals(btn[1].getText()) && !btn[1].getText().equals("")){
-            return new int[]{1, 1, 4, 7};
+            return new int[] {1, 1, 4, 7};
         } else if (btn[2].getText().equals(btn[5].getText()) && btn[8].getText().equals(btn[2].getText()) && !btn[2].getText().equals("")){
-            return new int[]{1, 2, 5, 8};
+            return new int[] {1, 2, 5, 8};
         } else if (btn[0].getText().equals(btn[4].getText()) && btn[8].getText().equals(btn[0].getText()) && !btn[0].getText().equals("")){
-            return new int[]{1, 0, 4, 8};
+            return new int[] {1, 0, 4, 8};
         } else if (btn[2].getText().equals(btn[4].getText()) && btn[6].getText().equals(btn[2].getText()) && !btn[2].getText().equals("")){
-            return new int[]{1, 2, 4, 6};
+            return new int[] {1, 2, 4, 6};
         }
 
         //se non ha vinto resituisce 0, ovvero che ha perso
-        return new int[]{0};
+        return new int[] {0};
     }
 
 
-    // quando il pulsante è premuto
+    // quando il pulsante è premuto Ovveride in Finestra.java
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
@@ -176,7 +177,6 @@ public class Tris extends Finestra {
     }
 
     private void reset() {
-
         for (int i = 0; i < 9; i++) {
             btn[i].setText("");
             btn[i].setBackground(null);
@@ -199,7 +199,6 @@ public class Tris extends Finestra {
     private void keyHandler(KeyEvent e) {
         // prende il tasto dalla tastiera
         int tasto = e.getKeyCode();
-
         // Se è premuto R, il gioco si riavvierà
         if (tasto == KeyEvent.VK_R) {
             reset();
@@ -255,8 +254,3 @@ public class Tris extends Finestra {
         popupReset();
     }
 }
-
-
-
-
-
